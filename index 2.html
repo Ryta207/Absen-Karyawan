@@ -5,45 +5,25 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="theme-color"
-        content="#2563eb"
-    >
+    <meta name="theme-color"
+          content="#2563eb">
 
-    <meta
-        name="apple-mobile-web-app-capable"
-        content="yes"
-    >
+    <meta name="apple-mobile-web-app-capable"
+          content="yes">
 
-    <meta
-        name="apple-mobile-web-app-status-bar-style"
-        content="default"
-    >
+    <meta name="apple-mobile-web-app-title"
+          content="Absen-Karyawan">
 
-    <meta
-        name="apple-mobile-web-app-title"
-        content="Absen Toko"
-    >
+    <title>Absen-Karyawan</title>
 
-    <title>Absen Karyawan Toko</title>
+    <link rel="stylesheet" href="style.css">
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
-    <link
-        rel="manifest"
-        href="manifest.json"
-    >
+    <link rel="manifest" href="manifest.json">
 
 </head>
-
 
 <body>
 
@@ -51,7 +31,7 @@
 
     <header>
 
-        <h1>📋 Absen Karyawan</h1>
+        <h1>📋 Absen-Karyawan</h1>
 
         <p>
             Sistem Absensi & Gaji Toko
@@ -69,18 +49,14 @@
             <input
                 type="text"
                 id="nama"
-                placeholder="Nama karyawan"
-            >
+                placeholder="Nama karyawan">
 
             <input
                 type="number"
                 id="gaji"
-                placeholder="Gaji per hari"
-            >
+                placeholder="Gaji per hari">
 
-            <button
-                onclick="tambahKaryawan()"
-            >
+            <button onclick="tambahKaryawan()">
                 + Tambah Karyawan
             </button>
 
@@ -102,31 +78,21 @@
                     <tr>
 
                         <th>Nama</th>
-
                         <th>Gaji/Hari</th>
 
                         <th>Sen</th>
-
                         <th>Sel</th>
-
                         <th>Rab</th>
-
                         <th>Kam</th>
-
                         <th>Jum</th>
-
                         <th>Sab</th>
-
                         <th>Min</th>
 
                         <th>Total Hari</th>
-
                         <th>Gaji Kotor</th>
 
                         <th>Kasbon</th>
-
                         <th>Potongan</th>
-
                         <th>Sisa Kasbon</th>
 
                         <th>Gaji Bersih</th>
@@ -157,22 +123,7 @@ if ("serviceWorker" in navigator) {
 
     window.addEventListener("load", function () {
 
-        navigator.serviceWorker.register("sw.js")
-            .then(function () {
-
-                console.log(
-                    "PWA berhasil aktif"
-                );
-
-            })
-            .catch(function (error) {
-
-                console.log(
-                    "PWA gagal:",
-                    error
-                );
-
-            });
+        navigator.serviceWorker.register("./sw.js");
 
     });
 
@@ -180,6 +131,6 @@ if ("serviceWorker" in navigator) {
 
 </script>
 
-
 </body>
+
 </html>
