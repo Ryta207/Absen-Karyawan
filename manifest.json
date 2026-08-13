@@ -1,0 +1,10 @@
+{
+    "name": "Absen-Karyawan",
+    "short_name": "Absen-Karyawan",
+    "description": "Sistem absensi dan penggajian karyawan toko",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#f1f5f9",
+    "theme_color": "#2563eb",
+    "orientation": "landscape"
+}
