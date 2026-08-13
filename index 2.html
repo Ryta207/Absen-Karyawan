@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#2563eb"
+    >
+
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="default"
+    >
+
+    <meta
+        name="apple-mobile-web-app-title"
+        content="Absen Toko"
+    >
+
+    <title>Absen Karyawan Toko</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <link
+        rel="manifest"
+        href="manifest.json"
+    >
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <header>
+
+        <h1>📋 Absen Karyawan</h1>
+
+        <p>
+            Sistem Absensi & Gaji Toko
+        </p>
+
+    </header>
+
+
+    <section class="form-card">
+
+        <h2>Tambah Karyawan</h2>
+
+        <div class="form-group">
+
+            <input
+                type="text"
+                id="nama"
+                placeholder="Nama karyawan"
+            >
+
+            <input
+                type="number"
+                id="gaji"
+                placeholder="Gaji per hari"
+            >
+
+            <button
+                onclick="tambahKaryawan()"
+            >
+                + Tambah Karyawan
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <section class="table-card">
+
+        <h2>Data Karyawan</h2>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Nama</th>
+
+                        <th>Gaji/Hari</th>
+
+                        <th>Sen</th>
+
+                        <th>Sel</th>
+
+                        <th>Rab</th>
+
+                        <th>Kam</th>
+
+                        <th>Jum</th>
+
+                        <th>Sab</th>
+
+                        <th>Min</th>
+
+                        <th>Total Hari</th>
+
+                        <th>Gaji Kotor</th>
+
+                        <th>Kasbon</th>
+
+                        <th>Potongan</th>
+
+                        <th>Sisa Kasbon</th>
+
+                        <th>Gaji Bersih</th>
+
+                        <th>Aksi</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="dataKaryawan"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script src="script.js"></script>
+
+
+<script>
+
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", function () {
+
+        navigator.serviceWorker.register("sw.js")
+            .then(function () {
+
+                console.log(
+                    "PWA berhasil aktif"
+                );
+
+            })
+            .catch(function (error) {
+
+                console.log(
+                    "PWA gagal:",
+                    error
+                );
+
+            });
+
+    });
+
+}
+
+</script>
+
+
+</body>
+</html>
