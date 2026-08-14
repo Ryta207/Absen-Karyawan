@@ -1,30 +1,62 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Absen-Karyawan</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
+
 <div class="container">
 
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
     <header>
-        <h1>📋 Absen-Karyawan</h1>
-        <p>Sistem Absensi & Gaji Toko</p>
+
+        <h1>
+            📋 Absen-Karyawan
+        </h1>
+
+        <p>
+            Sistem Absensi & Gaji Toko
+        </p>
+
     </header>
 
 
-    <!-- TAMBAH KARYAWAN -->
+
+    <!-- =========================
+         TAMBAH KARYAWAN
+    ========================== -->
+
     <section class="card">
 
-        <h2>Tambah Karyawan</h2>
+        <h2>
+            Tambah Karyawan
+        </h2>
+
 
         <div class="form">
+
 
             <input
                 type="text"
@@ -32,81 +64,205 @@
                 placeholder="Nama karyawan"
             >
 
+
             <input
                 type="number"
                 id="gaji"
                 placeholder="Gaji per hari"
             >
 
-            <button onclick="tambahKaryawan()">
+
+            <button
+                type="button"
+                onclick="tambahKaryawan()"
+            >
                 + Tambah
             </button>
 
+
         </div>
 
     </section>
 
 
-    <!-- LAPORAN -->
+
+    <!-- =========================
+         LAPORAN
+    ========================== -->
+
     <section class="card laporan-card">
 
-        <h2>📄 Laporan</h2>
 
-        <button onclick="cetakSemua()">
-            🖨️ Cetak Semua Laporan
-        </button>
+        <h2>
+            📄 Laporan
+        </h2>
+
+
+        <div class="laporan-buttons">
+
+
+            <!-- CETAK SEMUA -->
+
+            <button
+                type="button"
+                onclick="cetakSemua()"
+            >
+                🖨️ Cetak Semua Laporan
+            </button>
+
+
+
+            <!-- RESET MINGGU -->
+
+            <button
+                type="button"
+                onclick="resetMinggu()"
+            >
+                🔄 Reset Minggu
+            </button>
+
+
+        </div>
+
 
     </section>
 
 
-    <!-- DATA KARYAWAN -->
+
+    <!-- =========================
+         DATA KARYAWAN
+    ========================== -->
+
     <section class="card">
 
-        <h2>Data Karyawan</h2>
+
+        <h2>
+            Data Karyawan
+        </h2>
+
 
         <div class="table-container">
 
+
             <table>
+
 
                 <thead>
 
+
                     <tr>
-                        <th>Nama</th>
-                        <th>Gaji/Hari</th>
 
-                        <th>Sen</th>
-                        <th>Sel</th>
-                        <th>Rab</th>
-                        <th>Kam</th>
-                        <th>Jum</th>
-                        <th>Sab</th>
-                        <th>Min</th>
+                        <th>
+                            Nama
+                        </th>
 
-                        <th>Total Hari</th>
-                        <th>Gaji Kotor</th>
-                        <th>Kasbon</th>
-                        <th>Gaji Bersih</th>
-                        <th>Aksi</th>
+
+                        <th>
+                            Gaji/Hari
+                        </th>
+
+
+                        <th>
+                            Sen
+                        </th>
+
+
+                        <th>
+                            Sel
+                        </th>
+
+
+                        <th>
+                            Rab
+                        </th>
+
+
+                        <th>
+                            Kam
+                        </th>
+
+
+                        <th>
+                            Jum
+                        </th>
+
+
+                        <th>
+                            Sab
+                        </th>
+
+
+                        <th>
+                            Min
+                        </th>
+
+
+                        <th>
+                            Total Hari
+                        </th>
+
+
+                        <th>
+                            Gaji Kotor
+                        </th>
+
+
+                        <th>
+                            Kasbon
+                        </th>
+
+
+                        <th>
+                            Gaji Bersih
+                        </th>
+
+
+                        <th>
+                            Aksi
+                        </th>
+
                     </tr>
+
 
                 </thead>
 
-                <tbody id="dataKaryawan"></tbody>
+
+
+                <tbody id="dataKaryawan">
+
+                </tbody>
+
 
             </table>
 
+
         </div>
 
+
     </section>
+
 
 </div>
 
 
-<!-- AREA LAPORAN CETAK -->
-<div id="printArea"></div>
 
+<!-- =========================
+     AREA CETAK
+========================== -->
+
+<div id="printArea">
+
+</div>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================== -->
 
 <script src="script.js"></script>
 
+
 </body>
+
 </html>
