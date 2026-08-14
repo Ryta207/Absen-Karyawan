@@ -575,53 +575,41 @@ function statusHari(nilai) {
 }
 
 
-/* =====================================================
+/* =========================
    RESET MINGGU
-===================================================== */
+========================= */
 
 function resetMinggu() {
 
+    console.log("Tombol Reset Minggu ditekan");
+
     if (karyawan.length === 0) {
 
-        alert(
-            "Belum ada data karyawan."
-        );
+        alert("Belum ada data karyawan.");
 
         return;
     }
 
 
     const yakin = confirm(
-
         "🔄 MULAI MINGGU BARU?\n\n" +
-
-        "Data yang akan direset:\n\n" +
-
-        "• Absensi Senin - Minggu\n" +
-
-        "• Kasbon semua karyawan\n\n" +
-
-        "Nama dan gaji karyawan tetap tersimpan.\n\n" +
-
-        "Lanjutkan?"
-
+        "Absensi semua karyawan akan direset.\n" +
+        "Kasbon semua karyawan juga akan direset.\n\n" +
+        "Nama dan gaji TETAP disimpan.\n\n" +
+        "Apakah kamu yakin?"
     );
 
 
     if (!yakin) {
-
         return;
-
     }
 
 
-    karyawan.forEach(item => {
+    /* Reset semua karyawan */
 
+    for (let i = 0; i < karyawan.length; i++) {
 
-        /* Reset 7 hari */
-
-        item.hari = [
-
+        karyawan[i].hari = [
             0,
             0,
             0,
@@ -629,35 +617,67 @@ function resetMinggu() {
             0,
             0,
             0
-
         ];
 
-
-        /* Reset kasbon */
-
-        item.kasbon = 0;
+        karyawan[i].kasbon = 0;
+    }
 
 
-    });
+    /* Simpan */
+
+    localStorage.setItem(
+        "karyawan",
+        JSON.stringify(karyawan)
+    );
 
 
-    /* Simpan data baru */
-
-    simpanData();
-
-
-    /* Refresh tabel */
+    /* Tampilkan ulang */
 
     tampilkanData();
 
 
     alert(
-        "✅ Minggu baru berhasil dimulai!"
+        "✅ Minggu baru berhasil dimulai!\n\n" +
+        "Semua absensi dan kasbon sudah direset."
     );
 
 }
 
 
+/* =========================
+   JALANKAN
+========================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        tampilkanData();
+
+
+        const tombolReset =
+            document.getElementById(
+                "resetMingguBtn"
+            );
+
+
+        if (tombolReset) {
+
+            tombolReset.addEventListener(
+                "click",
+                resetMinggu
+            );
+
+        } else {
+
+            console.error(
+                "Tombol resetMingguBtn tidak ditemukan."
+            );
+
+        }
+
+    }
+);
 /* =========================
    BUAT LAPORAN
 ========================= */
