@@ -1,48 +1,26 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="theme-color"
-        content="#2563eb"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Absen-Karyawan</title>
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
+    <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
 <div class="container">
 
     <header>
-
-        <h1>Absen-Karyawan</h1>
-
-        <p>
-            Catatan absensi dan gaji karyawan
-        </p>
-
+        <h1>📋 Absen-Karyawan</h1>
+        <p>Sistem Absensi & Gaji Toko</p>
     </header>
 
 
     <!-- TAMBAH KARYAWAN -->
-
-    <div class="card">
+    <section class="card">
 
         <h2>Tambah Karyawan</h2>
 
@@ -61,30 +39,28 @@
             >
 
             <button onclick="tambahKaryawan()">
-                + Tambah Karyawan
+                + Tambah
             </button>
 
         </div>
 
-    </div>
+    </section>
 
 
     <!-- LAPORAN -->
+    <section class="card laporan-card">
 
-    <div class="card laporan-card">
+        <h2>📄 Laporan</h2>
 
-        <h2>Laporan</h2>
-
-        <button onclick="kirimSemuaWhatsApp()">
-            💬 Forward Semua ke WhatsApp
+        <button onclick="cetakSemua()">
+            🖨️ Cetak Semua Laporan
         </button>
 
-    </div>
+    </section>
 
 
     <!-- DATA KARYAWAN -->
-
-    <div class="card">
+    <section class="card">
 
         <h2>Data Karyawan</h2>
 
@@ -95,55 +71,42 @@
                 <thead>
 
                     <tr>
-
                         <th>Nama</th>
-
                         <th>Gaji/Hari</th>
 
-                        <th>Senin</th>
-
-                        <th>Selasa</th>
-
-                        <th>Rabu</th>
-
-                        <th>Kamis</th>
-
-                        <th>Jumat</th>
-
-                        <th>Sabtu</th>
-
-                        <th>Minggu</th>
+                        <th>Sen</th>
+                        <th>Sel</th>
+                        <th>Rab</th>
+                        <th>Kam</th>
+                        <th>Jum</th>
+                        <th>Sab</th>
+                        <th>Min</th>
 
                         <th>Total Hari</th>
-
                         <th>Gaji Kotor</th>
-
                         <th>Kasbon</th>
-
                         <th>Gaji Bersih</th>
-
                         <th>Aksi</th>
-
                     </tr>
 
                 </thead>
 
-
-                <tbody id="dataKaryawan">
-
-                </tbody>
+                <tbody id="dataKaryawan"></tbody>
 
             </table>
 
         </div>
 
-    </div>
+    </section>
 
 </div>
+
+
+<!-- AREA LAPORAN CETAK -->
+<div id="printArea"></div>
 
 
 <script src="script.js"></script>
 
 </body>
-
 </html>
