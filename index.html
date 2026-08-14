@@ -5,25 +5,25 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="theme-color"
-          content="#2563eb">
-
-    <meta name="apple-mobile-web-app-capable"
-          content="yes">
-
-    <meta name="apple-mobile-web-app-title"
-          content="Absen-Karyawan">
+    <meta
+        name="theme-color"
+        content="#2563eb"
+    >
 
     <title>Absen-Karyawan</title>
 
-    <link rel="stylesheet" href="style.css">
-
-    <link rel="manifest" href="manifest.json">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
 </head>
+
 
 <body>
 
@@ -31,30 +31,34 @@
 
     <header>
 
-        <h1>📋 Absen-Karyawan</h1>
+        <h1>Absen-Karyawan</h1>
 
         <p>
-            Sistem Absensi & Gaji Toko
+            Catatan absensi dan gaji karyawan
         </p>
 
     </header>
 
 
-    <section class="form-card">
+    <!-- TAMBAH KARYAWAN -->
+
+    <div class="card">
 
         <h2>Tambah Karyawan</h2>
 
-        <div class="form-group">
+        <div class="form">
 
             <input
                 type="text"
                 id="nama"
-                placeholder="Nama karyawan">
+                placeholder="Nama karyawan"
+            >
 
             <input
                 type="number"
                 id="gaji"
-                placeholder="Gaji per hari">
+                placeholder="Gaji per hari"
+            >
 
             <button onclick="tambahKaryawan()">
                 + Tambah Karyawan
@@ -62,14 +66,29 @@
 
         </div>
 
-    </section>
+    </div>
 
 
-    <section class="table-card">
+    <!-- LAPORAN -->
+
+    <div class="card laporan-card">
+
+        <h2>Laporan</h2>
+
+        <button onclick="kirimSemuaWhatsApp()">
+            💬 Forward Semua ke WhatsApp
+        </button>
+
+    </div>
+
+
+    <!-- DATA KARYAWAN -->
+
+    <div class="card">
 
         <h2>Data Karyawan</h2>
 
-        <div class="table-wrapper">
+        <div class="table-container">
 
             <table>
 
@@ -78,22 +97,28 @@
                     <tr>
 
                         <th>Nama</th>
+
                         <th>Gaji/Hari</th>
 
-                        <th>Sen</th>
-                        <th>Sel</th>
-                        <th>Rab</th>
-                        <th>Kam</th>
-                        <th>Jum</th>
-                        <th>Sab</th>
-                        <th>Min</th>
+                        <th>Senin</th>
+
+                        <th>Selasa</th>
+
+                        <th>Rabu</th>
+
+                        <th>Kamis</th>
+
+                        <th>Jumat</th>
+
+                        <th>Sabtu</th>
+
+                        <th>Minggu</th>
 
                         <th>Total Hari</th>
+
                         <th>Gaji Kotor</th>
 
                         <th>Kasbon</th>
-                        <th>Potongan</th>
-                        <th>Sisa Kasbon</th>
 
                         <th>Gaji Bersih</th>
 
@@ -103,33 +128,21 @@
 
                 </thead>
 
-                <tbody id="dataKaryawan"></tbody>
+
+                <tbody id="dataKaryawan">
+
+                </tbody>
 
             </table>
 
         </div>
 
-    </section>
+    </div>
 
 </div>
 
 
 <script src="script.js"></script>
-
-
-<script>
-
-if ("serviceWorker" in navigator) {
-
-    window.addEventListener("load", function () {
-
-        navigator.serviceWorker.register("./sw.js");
-
-    });
-
-}
-
-</script>
 
 </body>
 
