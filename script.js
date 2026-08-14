@@ -56,6 +56,7 @@ function tambahKaryawan() {
         ],
 
         kasbon: 0
+        potonganKasbon: 0
 
     });
 
@@ -135,14 +136,16 @@ function tampilkanData() {
 
 
         const gajiKotor =
-            totalHari *
-            Number(item.gaji);
+    totalHari *
+    Number(item.gaji);
 
+if(item.potonganKasbon === undefined){
+    item.potonganKasbon = 0;
+}
 
-        const gajiBersih =
-            gajiKotor -
-            Number(item.kasbon);
-
+const gajiBersih =
+    gajiKotor -
+    Number(item.potonganKasbon);
 
         let hariHTML = "";
 
@@ -467,49 +470,42 @@ function potongKasbon(index){
 
     if(!karyawan[index]) return;
 
-    if(karyawan[index].kasbon<=0){
-
-        alert("Kasbon sudah habis.");
-
+    if(karyawan[index].kasbon <= 0){
+        alert("Tidak ada kasbon.");
         return;
-
     }
 
     let nominal = prompt(
-        "Masukkan nominal potongan kasbon:",
-        "0"
+        "Masukkan nominal potongan kasbon dari gaji:"
     );
 
-    if(nominal===null) return;
+    if(nominal === null) return;
 
     nominal = Number(nominal);
 
-    if(isNaN(nominal) || nominal<=0){
-
+    if(isNaN(nominal) || nominal <= 0){
         alert("Nominal tidak valid.");
-
         return;
-
     }
 
-    if(nominal>karyawan[index].kasbon){
-
+    if(nominal > karyawan[index].kasbon){
         alert("Nominal melebihi sisa kasbon.");
-
         return;
-
     }
 
+    karyawan[index].potonganKasbon = nominal;
     karyawan[index].kasbon -= nominal;
 
     simpanData();
-
     tampilkanData();
 
-    alert("Kasbon berhasil dipotong.");
+    alert(
+        "Potongan kasbon berhasil.\n" +
+        "Potongan: Rp " + rupiah(nominal) +
+        "\nSisa Kasbon: Rp " + rupiah(karyawan[index].kasbon)
+    );
+
 }
-
-
 /* =========================
    EDIT KARYAWAN
 ========================= */
