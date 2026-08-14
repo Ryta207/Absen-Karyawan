@@ -1,10 +1,10 @@
-* {
+* * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, sans-serif;
     background: #f1f5f9;
     color: #1e293b;
 }
@@ -15,6 +15,11 @@ body {
     padding: 20px;
 }
 
+
+/* =========================
+   HEADER
+========================= */
+
 header {
     background: #2563eb;
     color: white;
@@ -24,24 +29,32 @@ header {
 }
 
 header h1 {
-    margin: 0 0 5px;
+    margin: 0 0 8px;
 }
 
 header p {
     margin: 0;
-    opacity: .9;
 }
 
-.form-card,
-.table-card {
+
+/* =========================
+   CARD
+========================= */
+
+.card {
     background: white;
     padding: 20px;
     border-radius: 15px;
     margin-bottom: 20px;
-    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
 }
 
-.form-group {
+
+/* =========================
+   FORM
+========================= */
+
+.form {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
@@ -54,33 +67,63 @@ input {
     font-size: 15px;
 }
 
-.form-group input {
+.form input {
     flex: 1;
     min-width: 180px;
 }
 
+
+/* =========================
+   BUTTON
+========================= */
+
 button {
     border: none;
     border-radius: 8px;
-    padding: 10px 14px;
-    cursor: pointer;
+    padding: 11px 15px;
     background: #2563eb;
     color: white;
     font-weight: bold;
+    cursor: pointer;
 }
 
 button:hover {
-    opacity: .9;
+    opacity: 0.9;
 }
 
-.table-wrapper {
+
+/* =========================
+   WHATSAPP
+========================= */
+
+.laporan-card button {
+    background: #25D366;
+}
+
+.whatsapp {
+    background: #25D366;
+    color: white;
+    margin-top: 5px;
+}
+
+.whatsapp:hover {
+    background: #1ebe5d;
+    opacity: 1;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-container {
     overflow-x: auto;
 }
 
 table {
     width: 100%;
+    min-width: 1300px;
     border-collapse: collapse;
-    min-width: 1500px;
 }
 
 th {
@@ -103,110 +146,49 @@ tr:hover {
 
 
 /* =========================
-   ABSENSI
+   SELECT
 ========================= */
 
-.absen-select {
+select {
     padding: 7px;
-    border-radius: 7px;
     border: 1px solid #cbd5e1;
-    font-size: 13px;
-    background: white;
-    cursor: pointer;
+    border-radius: 7px;
 }
 
 
 /* =========================
-   INPUT KASBON & POTONGAN
+   KASBON
 ========================= */
 
-.kasbon-input {
+.kasbon {
     width: 100px;
-    padding: 8px;
-    border: 1px solid #cbd5e1;
-    border-radius: 7px;
-    font-size: 14px;
-    text-align: right;
-    background: white;
-}
-
-.kasbon-input:focus {
-    outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 2px rgba(37,99,235,.15);
 }
 
 
 /* =========================
-   TOTAL HARI
+   TOMBOL AKSI
 ========================= */
 
-.total-hari {
-    font-weight: bold;
-    color: #2563eb;
-}
-
-
-/* =========================
-   GAJI KOTOR
-========================= */
-
-.gaji-kotor {
-    font-weight: bold;
-}
-
-
-/* =========================
-   SISA KASBON
-========================= */
-
-.sisa-kasbon {
-    font-weight: bold;
-    color: #dc2626;
-}
-
-
-/* =========================
-   GAJI BERSIH
-========================= */
-
-.gaji-bersih {
-    font-weight: bold;
-    color: #16a34a;
-}
-
-
-/* =========================
-   TOMBOL EDIT
-========================= */
-
-.edit-btn {
+.edit {
     background: #f59e0b;
-    margin: 2px;
 }
 
-
-/* =========================
-   TOMBOL HAPUS
-========================= */
-
-.delete-btn {
+.delete {
     background: #dc2626;
-    margin: 2px;
+}
+
+.bersih {
+    color: #16a34a;
+    font-weight: bold;
+}
+
+.kotor {
+    font-weight: bold;
 }
 
 
 /* =========================
-   TOMBOL UMUM DI TABEL
-========================= */
-
-td button {
-    margin: 2px;
-}
-
-
-/* =========================
-   RESPONSIVE HP
+   MOBILE
 ========================= */
 
 @media (max-width: 600px) {
@@ -217,27 +199,24 @@ td button {
 
     header {
         padding: 20px;
+        border-radius: 12px;
     }
 
-    header h1 {
-        font-size: 22px;
-    }
-
-    .form-card,
-    .table-card {
+    .card {
         padding: 15px;
     }
 
-    .form-group {
+    .form {
         flex-direction: column;
     }
 
-    .form-group input {
+    .form input,
+    .form button {
         width: 100%;
     }
 
-    .form-group button {
-        width: 100%;
+    button {
+        min-height: 42px;
     }
 
 }
