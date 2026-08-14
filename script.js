@@ -1,158 +1,197 @@
-let karyawan = JSON.parse(localStorage.getItem("karyawan")) || [];
+slet let karyawan =
+    JSON.parse(localStorage.getItem("karyawan")) || [];
 
-const hari = [
-    "senin",
-    "selasa",
-    "rabu",
-    "kamis",
-    "jumat",
-    "sabtu",
-    "minggu"
-];
+
+/* =========================
+   SIMPAN DATA
+========================= */
 
 function simpanData() {
-    localStorage.setItem("karyawan", JSON.stringify(karyawan));
+
+    localStorage.setItem(
+        "karyawan",
+        JSON.stringify(karyawan)
+    );
+
 }
 
-function formatRupiah(angka) {
-    return Number(angka || 0).toLocaleString("id-ID");
+
+/* =========================
+   TAMBAH KARYAWAN
+========================= */
+
+function tambahKaryawan() {
+
+    const nama =
+        document.getElementById("nama").value.trim();
+
+    const gaji =
+        Number(
+            document.getElementById("gaji").value
+        );
+
+
+    if (nama === "" || gaji <= 0) {
+
+        alert(
+            "Masukkan nama dan gaji dengan benar."
+        );
+
+        return;
+    }
+
+
+    karyawan.push({
+
+        nama: nama,
+
+        gaji: gaji,
+
+        hari: [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+
+        kasbon: 0
+
+    });
+
+
+    document.getElementById("nama").value = "";
+
+    document.getElementById("gaji").value = "";
+
+
+    simpanData();
+
+    tampilkanData();
+
 }
 
 
-// ===============================
-// TAMPILKAN DATA
-// ===============================
+/* =========================
+   TAMPILKAN DATA
+========================= */
 
 function tampilkanData() {
 
-    let tbody = document.getElementById("dataKaryawan");
+    const tbody =
+        document.getElementById(
+            "dataKaryawan"
+        );
+
 
     tbody.innerHTML = "";
 
-    karyawan.forEach((item, index) => {
 
-        // Data lama
-        if (!item.absen) {
+    karyawan.forEach(
+        (item, index) => {
 
-            item.absen = {
-                senin: 0,
-                selasa: 0,
-                rabu: 0,
-                kamis: 0,
-                jumat: 0,
-                sabtu: 0,
-                minggu: 0
-            };
+
+        if (!Array.isArray(item.hari)) {
+
+            item.hari = [
+                0, 0, 0, 0, 0, 0, 0
+            ];
 
         }
+
+
+        while (item.hari.length < 7) {
+
+            item.hari.push(0);
+
+        }
+
 
         if (item.kasbon === undefined) {
+
             item.kasbon = 0;
+
         }
 
-        if (item.potongan === undefined) {
-            item.potongan = 0;
-        }
-
-
-        // ===============================
-        // HITUNG TOTAL HARI
-        // ===============================
 
         let totalHari = 0;
 
-        hari.forEach(namaHari => {
 
-            totalHari += Number(
-                item.absen[namaHari] || 0
-            );
+        item.hari.forEach(
+            hari => {
 
-        });
+                totalHari +=
+                    Number(hari);
 
-
-        // ===============================
-        // HITUNG GAJI
-        // ===============================
-
-        let gajiKotor =
-            totalHari * Number(item.gaji);
+            }
+        );
 
 
-        // ===============================
-        // BATASI POTONGAN
-        // ===============================
-
-        let potongan =
-            Number(item.potongan) || 0;
-
-        let totalKasbon =
-            Number(item.kasbon) || 0;
+        const gajiKotor =
+            totalHari *
+            Number(item.gaji);
 
 
-        // Potongan tidak boleh melebihi kasbon
-        if (potongan > totalKasbon) {
-
-            potongan = totalKasbon;
-
-            item.potongan = totalKasbon;
-
-        }
+        const gajiBersih =
+            gajiKotor -
+            Number(item.kasbon);
 
 
-        // ===============================
-        // SISA KASBON
-        // ===============================
-
-        let sisaKasbon =
-            totalKasbon - potongan;
+        let hariHTML = "";
 
 
-        // ===============================
-        // GAJI BERSIH
-        // ===============================
-
-        let gajiBersih =
-            gajiKotor - potongan;
+        item.hari.forEach(
+            (nilai, hariIndex) => {
 
 
-        // ===============================
-        // KOLOM ABSEN
-        // ===============================
-
-        let kolomHari = "";
-
-        hari.forEach(namaHari => {
-
-            let nilai =
-                item.absen[namaHari] || 0;
-
-            kolomHari += `
+            hariHTML += `
 
                 <td>
 
                     <select
-                        class="absen-select"
                         onchange="
-                        ubahAbsen(
+                        ubahHari(
                             ${index},
-                            '${namaHari}',
+                            ${hariIndex},
                             this.value
                         )
                         "
                     >
 
-                        <option value="0"
-                            ${nilai == 0 ? "selected" : ""}>
+                        <option
+                            value="0"
+                            ${
+                                nilai == 0
+                                ? "selected"
+                                : ""
+                            }
+                        >
                             Libur
                         </option>
 
-                        <option value="0.5"
-                            ${nilai == 0.5 ? "selected" : ""}>
+
+                        <option
+                            value="0.5"
+                            ${
+                                nilai == 0.5
+                                ? "selected"
+                                : ""
+                            }
+                        >
                             ½ Hari
                         </option>
 
-                        <option value="1"
-                            ${nilai == 1 ? "selected" : ""}>
+
+                        <option
+                            value="1"
+                            ${
+                                nilai == 1
+                                ? "selected"
+                                : ""
+                            }
+                        >
                             Full
                         </option>
 
@@ -165,105 +204,85 @@ function tampilkanData() {
         });
 
 
-        // ===============================
-        // TAMPILKAN BARIS
-        // ===============================
-
         tbody.innerHTML += `
 
             <tr>
 
+
                 <td>
+
                     <strong>
                         ${item.nama}
                     </strong>
+
                 </td>
 
-                <td>
-                    Rp ${formatRupiah(item.gaji)}
-                </td>
-
-                ${kolomHari}
-
-                <td class="total-hari">
-                    ${totalHari}
-                </td>
-
-                <td>
-                    Rp ${formatRupiah(gajiKotor)}
-                </td>
-
-
-                <!-- KASBON -->
 
                 <td>
 
-                    <input
-                        class="kasbon-input"
-                        type="number"
-                        min="0"
-                        value="${totalKasbon}"
-                        onchange="
-                            ubahKasbon(
-                                ${index},
-                                this.value
-                            )
-                        "
-                    >
+                    Rp
+                    ${rupiah(item.gaji)}
 
                 </td>
 
 
-                <!-- POTONGAN -->
+                ${hariHTML}
 
-                <td>
-
-                    <input
-                        class="kasbon-input"
-                        type="number"
-                        min="0"
-                        value="${potongan}"
-                        onchange="
-                            ubahPotongan(
-                                ${index},
-                                this.value
-                            )
-                        "
-                    >
-
-                </td>
-
-
-                <!-- SISA KASBON -->
 
                 <td>
 
                     <strong>
-                        Rp ${formatRupiah(sisaKasbon)}
+                        ${totalHari}
                     </strong>
 
                 </td>
 
 
-                <!-- GAJI BERSIH -->
+                <td class="kotor">
 
-                <td class="gaji-bersih">
-
-                    <strong>
-                        Rp ${formatRupiah(gajiBersih)}
-                    </strong>
+                    Rp
+                    ${rupiah(gajiKotor)}
 
                 </td>
 
 
-                <!-- AKSI -->
+                <td>
+
+                    <input
+
+                        class="kasbon"
+
+                        type="number"
+
+                        value="${item.kasbon}"
+
+                        onchange="
+                        ubahKasbon(
+                            ${index},
+                            this.value
+                        )
+                        "
+
+                    >
+
+                </td>
+
+
+                <td class="bersih">
+
+                    Rp
+                    ${rupiah(gajiBersih)}
+
+                </td>
+
 
                 <td>
+
 
                     <button
-                        class="edit-btn"
+                        class="edit"
                         onclick="
-                            editKaryawan(${index})
+                        editKaryawan(${index})
                         "
                     >
                         Edit
@@ -271,15 +290,27 @@ function tampilkanData() {
 
 
                     <button
-                        class="delete-btn"
+                        class="delete"
                         onclick="
-                            hapus(${index})
+                        hapusKaryawan(${index})
                         "
                     >
                         Hapus
                     </button>
 
+
+                    <button
+                        class="whatsapp"
+                        onclick="
+                        kirimWhatsApp(${index})
+                        "
+                    >
+                        💬 WhatsApp
+                    </button>
+
+
                 </td>
+
 
             </tr>
 
@@ -287,280 +318,430 @@ function tampilkanData() {
 
     });
 
+
     simpanData();
+
 }
 
 
-// ===============================
-// TAMBAH KARYAWAN
-// ===============================
+/* =========================
+   UBAH ABSENSI
+========================= */
 
-function tambahKaryawan() {
-
-    let nama =
-        document
-        .getElementById("nama")
-        .value
-        .trim();
-
-    let gaji =
-        document
-        .getElementById("gaji")
-        .value;
-
-
-    if (nama === "" || gaji === "") {
-
-        alert(
-            "Nama dan gaji harus diisi!"
-        );
-
-        return;
-    }
-
-
-    karyawan.push({
-
-        nama: nama,
-
-        gaji: Number(gaji),
-
-        kasbon: 0,
-
-        potongan: 0,
-
-        absen: {
-
-            senin: 0,
-            selasa: 0,
-            rabu: 0,
-            kamis: 0,
-            jumat: 0,
-            sabtu: 0,
-            minggu: 0
-
-        }
-
-    });
-
-
-    document
-        .getElementById("nama")
-        .value = "";
-
-    document
-        .getElementById("gaji")
-        .value = "";
-
-
-    tampilkanData();
-}
-
-
-// ===============================
-// ABSEN
-// ===============================
-
-function ubahAbsen(
+function ubahHari(
     index,
-    namaHari,
+    hariIndex,
     nilai
 ) {
 
-    karyawan[index]
-        .absen[namaHari] =
+    karyawan[index].hari[hariIndex] =
         Number(nilai);
 
 
+    simpanData();
+
     tampilkanData();
+
 }
 
 
-// ===============================
-// TAMBAH / EDIT KASBON
-// ===============================
+/* =========================
+   UBAH KASBON
+========================= */
 
 function ubahKasbon(
     index,
     nilai
 ) {
 
-    nilai = Number(nilai) || 0;
-
-
-    if (nilai < 0) {
-        nilai = 0;
-    }
-
-
     karyawan[index].kasbon =
-        nilai;
+        Number(nilai) || 0;
 
 
-    // Kalau kasbon dikurangi
-    // dan potongan lebih besar
-    // dari kasbon baru
-
-    if (
-        karyawan[index].potongan >
-        nilai
-    ) {
-
-        karyawan[index].potongan =
-            nilai;
-
-    }
-
+    simpanData();
 
     tampilkanData();
+
 }
 
 
-// ===============================
-// POTONGAN KASBON
-// ===============================
-
-function ubahPotongan(
-    index,
-    nilai
-) {
-
-    nilai = Number(nilai) || 0;
-
-
-    if (nilai < 0) {
-        nilai = 0;
-    }
-
-
-    let kasbon =
-        Number(
-            karyawan[index].kasbon
-        ) || 0;
-
-
-    // Potongan tidak boleh
-    // lebih besar dari kasbon
-
-    if (nilai > kasbon) {
-
-        alert(
-            "Potongan tidak boleh lebih besar dari kasbon!"
-        );
-
-        nilai = kasbon;
-
-    }
-
-
-    karyawan[index].potongan =
-        nilai;
-
-
-    tampilkanData();
-}
-
-
-// ===============================
-// EDIT KARYAWAN
-// ===============================
+/* =========================
+   EDIT
+========================= */
 
 function editKaryawan(index) {
 
-    let namaBaru =
+    const namaBaru =
         prompt(
-            "Edit nama karyawan:",
+            "Nama karyawan:",
             karyawan[index].nama
         );
 
 
     if (namaBaru === null) {
+
         return;
+
     }
 
 
-    namaBaru =
-        namaBaru.trim();
-
-
-    if (namaBaru === "") {
-
-        alert(
-            "Nama tidak boleh kosong!"
-        );
-
-        return;
-    }
-
-
-    let gajiBaru =
+    const gajiBaru =
         prompt(
-            "Edit gaji per hari:",
+            "Gaji per hari:",
             karyawan[index].gaji
         );
 
 
     if (gajiBaru === null) {
+
         return;
+
     }
 
 
-    gajiBaru =
-        Number(gajiBaru);
-
-
     if (
-        gajiBaru <= 0 ||
-        isNaN(gajiBaru)
+        namaBaru.trim() === "" ||
+        Number(gajiBaru) <= 0
     ) {
 
         alert(
-            "Gaji tidak valid!"
+            "Data tidak valid."
         );
 
         return;
+
     }
 
 
     karyawan[index].nama =
-        namaBaru;
+        namaBaru.trim();
+
 
     karyawan[index].gaji =
-        gajiBaru;
+        Number(gajiBaru);
 
+
+    simpanData();
 
     tampilkanData();
+
 }
 
 
-// ===============================
-// HAPUS
-// ===============================
+/* =========================
+   HAPUS
+========================= */
 
-function hapus(index) {
+function hapusKaryawan(index) {
 
-    let yakin =
+    const yakin =
         confirm(
-            "Apakah Anda yakin ingin menghapus " +
-            karyawan[index].nama +
-            "?"
+            "Yakin ingin menghapus karyawan ini?"
         );
 
 
     if (!yakin) {
+
         return;
+
     }
 
 
-    karyawan.splice(index, 1);
+    karyawan.splice(
+        index,
+        1
+    );
 
+
+    simpanData();
 
     tampilkanData();
+
 }
 
 
-// ===============================
-// JALANKAN
-// ===============================
+/* =========================
+   RUPIAH
+========================= */
+
+function rupiah(angka) {
+
+    return Number(
+        angka || 0
+    ).toLocaleString("id-ID");
+
+}
+
+
+/* =========================
+   NAMA HARI
+========================= */
+
+const namaHari = [
+
+    "Senin",
+    "Selasa",
+    "Rabu",
+    "Kamis",
+    "Jumat",
+    "Sabtu",
+    "Minggu"
+
+];
+
+
+/* =========================
+   STATUS HARI
+========================= */
+
+function statusHari(nilai) {
+
+    nilai = Number(nilai);
+
+
+    if (nilai === 1) {
+
+        return "Full";
+
+    }
+
+
+    if (nilai === 0.5) {
+
+        return "½ Hari";
+
+    }
+
+
+    return "Libur";
+
+}
+
+
+/* =========================
+   BUAT TEKS LAPORAN
+========================= */
+
+function buatTeksLaporan(item) {
+
+    let totalHari = 0;
+
+
+    item.hari.forEach(
+        hari => {
+
+            totalHari +=
+                Number(hari);
+
+        }
+    );
+
+
+    const gajiKotor =
+        totalHari *
+        Number(item.gaji);
+
+
+    const kasbon =
+        Number(item.kasbon) || 0;
+
+
+    const gajiBersih =
+        gajiKotor -
+        kasbon;
+
+
+    let absensi = "";
+
+
+    item.hari.forEach(
+        (nilai, indexHari) => {
+
+            absensi +=
+                namaHari[indexHari]
+                + " : "
+                + statusHari(nilai)
+                + "\n";
+
+        }
+    );
+
+
+    const tanggal =
+        new Date().toLocaleDateString(
+            "id-ID",
+            {
+                day: "2-digit",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+
+    return `📋 *LAPORAN GAJI KARYAWAN*
+*ABSEN-KARYAWAN*
+
+👤 *Nama:* ${item.nama}
+
+💰 *Gaji per Hari:* Rp ${rupiah(item.gaji)}
+
+📅 *ABSENSI*
+${absensi}
+📊 *RINGKASAN*
+
+Total Hari : ${totalHari} Hari
+Gaji Kotor : Rp ${rupiah(gajiKotor)}
+Kasbon : Rp ${rupiah(kasbon)}
+
+💵 *GAJI BERSIH*
+Rp ${rupiah(gajiBersih)}
+
+📅 Tanggal: ${tanggal}`;
+
+}
+
+
+/* =========================
+   KIRIM WHATSAPP
+========================= */
+
+function kirimWhatsApp(index) {
+
+    const item =
+        karyawan[index];
+
+
+    if (!item) {
+
+        alert(
+            "Karyawan tidak ditemukan."
+        );
+
+        return;
+
+    }
+
+
+    const pesan =
+        buatTeksLaporan(item);
+
+
+    const url =
+        "https://wa.me/?text=" +
+        encodeURIComponent(pesan);
+
+
+    window.location.href =
+        url;
+
+}
+
+
+/* =========================
+   FORWARD SEMUA
+========================= */
+
+function kirimSemuaWhatsApp() {
+
+    if (karyawan.length === 0) {
+
+        alert(
+            "Belum ada data karyawan."
+        );
+
+        return;
+
+    }
+
+
+    let pesan =
+        "📋 *LAPORAN GAJI KARYAWAN*\n";
+
+    pesan +=
+        "*ABSEN-KARYAWAN*\n\n";
+
+
+    karyawan.forEach(
+        (item, index) => {
+
+            let totalHari = 0;
+
+
+            item.hari.forEach(
+                hari => {
+
+                    totalHari +=
+                        Number(hari);
+
+                }
+            );
+
+
+            const gajiKotor =
+                totalHari *
+                Number(item.gaji);
+
+
+            const kasbon =
+                Number(item.kasbon) || 0;
+
+
+            const gajiBersih =
+                gajiKotor -
+                kasbon;
+
+
+            pesan +=
+                `👤 *${item.nama}*\n`;
+
+
+            pesan +=
+                `Total Hari: ${totalHari}\n`;
+
+
+            pesan +=
+                `Gaji Kotor: Rp ${rupiah(gajiKotor)}\n`;
+
+
+            pesan +=
+                `Kasbon: Rp ${rupiah(kasbon)}\n`;
+
+
+            pesan +=
+                `💵 *Gaji Bersih: Rp ${rupiah(gajiBersih)}*\n`;
+
+
+            if (
+                index <
+                karyawan.length - 1
+            ) {
+
+                pesan +=
+                    "\n--------------------\n\n";
+
+            }
+
+        }
+    );
+
+
+    pesan +=
+        "\n📱 Dikirim dari Absen-Karyawan";
+
+
+    const url =
+        "https://wa.me/?text=" +
+        encodeURIComponent(pesan);
+
+
+    window.location.href =
+        url;
+
+}
+
+
+/* =========================
+   JALANKAN
+========================= */
 
 tampilkanData();
