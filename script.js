@@ -245,28 +245,38 @@ function tampilkanData() {
                 </td>
 
 
-                <td>
+             <td>
 
-                    <input
+    <input
 
-                        class="kasbon"
+        class="kasbon"
 
-                        type="number"
+        type="number"
 
-                        min="0"
+        min="0"
 
-                        value="${item.kasbon}"
+        value="${item.kasbon}"
 
-                        onchange="
-                            ubahKasbon(
-                                ${index},
-                                this.value
-                            )
-                        "
+        onchange="
+            ubahKasbon(
+                ${index},
+                this.value
+            )
+        "
 
-                    >
+    >
 
-                </td>
+    <br>
+
+    <button
+        type="button"
+        onclick="potongKasbon(${index})"
+        style="margin-top:5px;font-size:12px;width:100%;"
+    >
+        ➖ Potong
+    </button>
+
+</td>
 
 
                 <td class="bersih">
