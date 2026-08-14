@@ -688,11 +688,12 @@ function resetMinggu() {
 
 
     const yakin = confirm(
-        "🔄 MULAI MINGGU BARU?\n\n" +
-        "Absensi semua karyawan akan direset.\n" +
-        "Kasbon semua karyawan juga akan direset.\n\n" +
-        "Nama dan gaji TETAP disimpan.\n\n" +
-        "Apakah kamu yakin?"
+    "🔄 MULAI MINGGU BARU?\n\n" +
+    "Absensi semua karyawan akan direset.\n" +
+    "Kasbon akan tetap tersimpan.\n\n" +
+    "Nama dan gaji TETAP disimpan.\n\n" +
+    "Apakah kamu yakin?"
+);
     );
 
 
@@ -705,18 +706,18 @@ function resetMinggu() {
 
     for (let i = 0; i < karyawan.length; i++) {
 
-        karyawan[i].hari = [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-        ];
+    karyawan[i].hari = [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+    ];
 
-        karyawan[i].kasbon = 0;
-    }
+    // Kasbon tidak direset
+}
 
 
     /* Simpan */
@@ -734,7 +735,7 @@ function resetMinggu() {
 
     alert(
         "✅ Minggu baru berhasil dimulai!\n\n" +
-        "Semua absensi dan kasbon sudah direset."
+     "Kasbon akan tetap tersimpan.\n\n"
     );
 
 }
