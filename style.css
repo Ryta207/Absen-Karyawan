@@ -1,279 +1,1008 @@
-* {
-    box-sizing: border-box;
-}
+/* =====================================================
+   ABSEN-KARYAWAN
+   MODERN DASHBOARD UI
+===================================================== */
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f1f5f9;
-    color: #1e293b;
-}
-
-.container {
-    max-width: 1400px;
-    margin: auto;
-    padding: 20px;
-}
-
-header {
-    background: #2563eb;
-    color: white;
-    padding: 25px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-}
-
-header h1 {
-    margin: 0 0 8px;
-}
-
-header p {
-    margin: 0;
-}
-
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-}
-
-.form {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-input {
-    padding: 12px;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    font-size: 15px;
-}
-
-.form input {
-    flex: 1;
-    min-width: 180px;
-}
-
-button {
-    border: none;
-    border-radius: 8px;
-    padding: 11px 15px;
-    background: #2563eb;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button:hover {
-    opacity: 0.9;
-}
-
-.laporan-card button {
-    background: #16a34a;
-}
-
-.table-container {
-    overflow-x: auto;
-}
-
-table {
-    width: 100%;
-    min-width: 1300px;
-    border-collapse: collapse;
-}
-
-th {
-    background: #2563eb;
-    color: white;
-    padding: 12px 8px;
-    white-space: nowrap;
-}
-
-td {
-    padding: 10px 8px;
-    border-bottom: 1px solid #e2e8f0;
-    text-align: center;
-    white-space: nowrap;
-}
-
-tr:hover {
-    background: #f8fafc;
-}
-
-select {
-    padding: 7px;
-    border: 1px solid #cbd5e1;
-    border-radius: 7px;
-}
-
-.kasbon {
-    width: 100px;
-}
-
-.edit {
-    background: #f59e0b;
-}
-
-.delete {
-    background: #dc2626;
-}
-
-.print {
-    background: #0f766e;
-    margin-top: 5px;
-}
 
 /* =========================
-   WHATSAPP
+   RESET
+========================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:
+        #f5f7fb;
+
+    color:
+        #172033;
+
+    min-height:
+        100vh;
+
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+
+    width:
+        min(1400px, 94%);
+
+    margin:
+        30px auto 50px;
+
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #4f46e5
+        );
+
+    color:
+        white;
+
+    padding:
+        30px;
+
+    border-radius:
+        20px;
+
+    margin-bottom:
+        22px;
+
+    box-shadow:
+        0 12px 30px
+        rgba(37, 99, 235, 0.18);
+
+}
+
+
+header h1 {
+
+    font-size:
+        30px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        -0.5px;
+
+}
+
+
+header p {
+
+    margin-top:
+        7px;
+
+    opacity:
+        0.88;
+
+    font-size:
+        15px;
+
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+
+    background:
+        white;
+
+    border:
+        1px solid
+        #e7eaf0;
+
+    border-radius:
+        18px;
+
+    padding:
+        24px;
+
+    margin-bottom:
+        20px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(15, 23, 42, 0.05);
+
+}
+
+
+.card h2 {
+
+    font-size:
+        20px;
+
+    margin-bottom:
+        18px;
+
+    color:
+        #172033;
+
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr auto;
+
+    gap:
+        12px;
+
+}
+
+
+input,
+select {
+
+    font-family:
+        inherit;
+
+}
+
+
+.form input {
+
+    width:
+        100%;
+
+    padding:
+        13px 15px;
+
+    border:
+        1px solid
+        #dfe3eb;
+
+    border-radius:
+        10px;
+
+    background:
+        #fafbfc;
+
+    color:
+        #172033;
+
+    font-size:
+        14px;
+
+    outline:
+        none;
+
+    transition:
+        0.2s;
+
+}
+
+
+.form input:focus {
+
+    border-color:
+        #2563eb;
+
+    background:
+        white;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37, 99, 235, 0.10);
+
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+button {
+
+    border:
+        none;
+
+    border-radius:
+        10px;
+
+    padding:
+        11px 16px;
+
+    font-family:
+        inherit;
+
+    font-size:
+        14px;
+
+    font-weight:
+        700;
+
+    cursor:
+        pointer;
+
+    transition:
+        0.2s ease;
+
+}
+
+
+button:hover {
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+button:active {
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* =========================
+   BUTTON TAMBAH
+========================= */
+
+.form button {
+
+    background:
+        #2563eb;
+
+    color:
+        white;
+
+    min-width:
+        120px;
+
+    box-shadow:
+        0 5px 12px
+        rgba(37, 99, 235, 0.20);
+
+}
+
+
+.form button:hover {
+
+    background:
+        #1d4ed8;
+
+}
+
+
+/* =========================
+   LAPORAN
+========================= */
+
+.laporan-card {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        20px;
+
+}
+
+
+.laporan-card h2 {
+
+    margin:
+        0;
+
+}
+
+
+.laporan-card button {
+
+    background:
+        #0f172a;
+
+    color:
+        white;
+
+}
+
+
+.laporan-card button:hover {
+
+    background:
+        #1e293b;
+
+}
+
+
+/* =========================
+   RESET MINGGU
+========================= */
+
+#resetMingguBtn {
+
+    background:
+        #f59e0b;
+
+    color:
+        white;
+
+}
+
+
+#resetMingguBtn:hover {
+
+    background:
+        #d97706;
+
+}
+
+
+/* =========================
+   TABLE CONTAINER
+========================= */
+
+.table-container {
+
+    width:
+        100%;
+
+    overflow-x:
+        auto;
+
+    border:
+        1px solid
+        #e5e7eb;
+
+    border-radius:
+        14px;
+
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+table {
+
+    width:
+        100%;
+
+    min-width:
+        1150px;
+
+    border-collapse:
+        collapse;
+
+    font-size:
+        13px;
+
+}
+
+
+/* =========================
+   TABLE HEADER
+========================= */
+
+thead th {
+
+    background:
+        #f8fafc;
+
+    color:
+        #475569;
+
+    font-weight:
+        700;
+
+    text-align:
+        center;
+
+    padding:
+        14px 10px;
+
+    border-bottom:
+        1px solid
+        #e5e7eb;
+
+    white-space:
+        nowrap;
+
+}
+
+
+thead th:first-child {
+
+    text-align:
+        left;
+
+}
+
+
+/* =========================
+   TABLE BODY
+========================= */
+
+tbody td {
+
+    padding:
+        12px 10px;
+
+    border-bottom:
+        1px solid
+        #eef0f4;
+
+    text-align:
+        center;
+
+    white-space:
+        nowrap;
+
+}
+
+
+tbody tr {
+
+    transition:
+        0.15s;
+
+}
+
+
+tbody tr:hover {
+
+    background:
+        #f8faff;
+
+}
+
+
+tbody tr:last-child td {
+
+    border-bottom:
+        none;
+
+}
+
+
+tbody td:first-child {
+
+    text-align:
+        left;
+
+}
+
+
+/* =========================
+   SELECT ABSENSI
+========================= */
+
+tbody select {
+
+    appearance:
+        none;
+
+    -webkit-appearance:
+        none;
+
+    padding:
+        7px 25px 7px 9px;
+
+    border:
+        1px solid
+        #dfe3eb;
+
+    border-radius:
+        8px;
+
+    background:
+        #f8fafc;
+
+    color:
+        #334155;
+
+    font-size:
+        12px;
+
+    font-weight:
+        600;
+
+    cursor:
+        pointer;
+
+    outline:
+        none;
+
+}
+
+
+tbody select:focus {
+
+    border-color:
+        #2563eb;
+
+}
+
+
+/* =========================
+   KASBON
+========================= */
+
+.kasbon {
+
+    width:
+        110px;
+
+    padding:
+        8px 9px;
+
+    border:
+        1px solid
+        #e2e8f0;
+
+    border-radius:
+        8px;
+
+    background:
+        #fff7ed;
+
+    color:
+        #9a3412;
+
+    font-weight:
+        600;
+
+    text-align:
+        right;
+
+    outline:
+        none;
+
+}
+
+
+.kasbon:focus {
+
+    border-color:
+        #f59e0b;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(245, 158, 11, 0.10);
+
+}
+
+
+/* =========================
+   GAJI KOTOR
+========================= */
+
+.kotor {
+
+    color:
+        #2563eb;
+
+    font-weight:
+        700;
+
+}
+
+
+/* =========================
+   GAJI BERSIH
+========================= */
+
+.bersih {
+
+    color:
+        #16a34a;
+
+    font-weight:
+        800;
+
+}
+
+
+/* =========================
+   ACTION
+========================= */
+
+td:last-child {
+
+    min-width:
+        300px;
+
+}
+
+
+/* =========================
+   EDIT BUTTON
+========================= */
+
+.edit {
+
+    background:
+        #e0f2fe;
+
+    color:
+        #0369a1;
+
+    margin:
+        2px;
+
+}
+
+
+.edit:hover {
+
+    background:
+        #bae6fd;
+
+}
+
+
+/* =========================
+   DELETE BUTTON
+========================= */
+
+.delete {
+
+    background:
+        #fee2e2;
+
+    color:
+        #dc2626;
+
+    margin:
+        2px;
+
+}
+
+
+.delete:hover {
+
+    background:
+        #fecaca;
+
+}
+
+
+/* =========================
+   PRINT BUTTON
+========================= */
+
+.print {
+
+    background:
+        #f1f5f9;
+
+    color:
+        #334155;
+
+    margin:
+        2px;
+
+}
+
+
+.print:hover {
+
+    background:
+        #e2e8f0;
+
+}
+
+
+/* =========================
+   WHATSAPP BUTTON
 ========================= */
 
 .whatsapp {
-    background: #25D366;
-    color: white;
-    margin-top: 5px;
+
+    background:
+        #dcfce7;
+
+    color:
+        #15803d;
+
+    margin:
+        2px;
+
 }
+
 
 .whatsapp:hover {
-    background: #1ebe5d;
-    opacity: 1;
-}
 
-.bersih {
-    color: #16a34a;
-    font-weight: bold;
-}
+    background:
+        #bbf7d0;
 
-.kotor {
-    font-weight: bold;
 }
 
 
 /* =========================
-   LAPORAN CETAK
+   EMPTY TABLE
+========================= */
+
+tbody:empty::after {
+
+    content:
+        "Belum ada data karyawan";
+
+    display:
+        block;
+
+    padding:
+        30px;
+
+    color:
+        #94a3b8;
+
+    text-align:
+        center;
+
+}
+
+
+/* =========================
+   PRINT AREA
 ========================= */
 
 #printArea {
-    display: none;
-}
 
-.laporan {
-    font-family: Arial, sans-serif;
-    color: #000;
-    padding: 20px;
-}
+    display:
+        none;
 
-.laporan h1 {
-    text-align: center;
-    margin-bottom: 5px;
-}
-
-.laporan h2 {
-    text-align: center;
-    margin-top: 0;
-}
-
-.laporan-info {
-    margin: 20px 0;
-}
-
-.laporan table {
-    width: 100%;
-    min-width: 0;
-    border-collapse: collapse;
-}
-
-.laporan th,
-.laporan td {
-    border: 1px solid #000;
-    padding: 8px;
-    text-align: left;
-}
-
-.laporan th {
-    background: #eee;
-    color: #000;
-}
-
-.total-box {
-    margin-top: 20px;
-    border: 1px solid #000;
-    padding: 15px;
-}
-
-.total-box p {
-    margin: 7px 0;
-}
-
-.signature {
-    margin-top: 60px;
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-}
-
-.signature div {
-    width: 200px;
 }
 
 
 /* =========================
-   MODE PRINT
+   MOBILE
 ========================= */
 
-@media print {
+@media (max-width: 768px) {
 
-    body {
-        background: white;
-    }
 
     .container {
-        display: none !important;
+
+        width:
+            94%;
+
+        margin:
+            15px auto 30px;
+
     }
 
-    #printArea {
-        display: block !important;
-    }
-
-    @page {
-        size: A4;
-        margin: 15mm;
-    }
-}
-
-
-/* =========================
-   RESPONSIVE HP
-========================= */
-
-@media (max-width: 600px) {
-
-    .container {
-        padding: 10px;
-    }
 
     header {
-        padding: 20px;
-        border-radius: 12px;
+
+        padding:
+            22px;
+
+        border-radius:
+            16px;
+
     }
+
+
+    header h1 {
+
+        font-size:
+            23px;
+
+    }
+
+
+    header p {
+
+        font-size:
+            13px;
+
+    }
+
 
     .card {
-        padding: 15px;
+
+        padding:
+            17px;
+
+        border-radius:
+            15px;
+
     }
+
+
+    .card h2 {
+
+        font-size:
+            18px;
+
+    }
+
 
     .form {
-        flex-direction: column;
+
+        grid-template-columns:
+            1fr;
+
     }
 
-    .form input,
+
     .form button {
-        width: 100%;
+
+        width:
+            100%;
+
     }
 
-    button {
-        min-height: 42px;
+
+    .laporan-card {
+
+        display:
+            flex;
+
+        flex-direction:
+            column;
+
+        align-items:
+            stretch;
+
     }
+
+
+    .laporan-card button {
+
+        width:
+            100%;
+
+    }
+
+
+    .table-container {
+
+        border-radius:
+            10px;
+
+    }
+
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+
+    header {
+
+        padding:
+            18px;
+
+    }
+
+
+    header h1 {
+
+        font-size:
+            21px;
+
+    }
+
+
+    .card {
+
+        padding:
+            14px;
+
+    }
+
+
+    .form input {
+
+        padding:
+            12px;
+
+    }
+
+
+}
+
+
+/* =========================
+   SMOOTH SCROLL
+========================= */
+
+html {
+
+    scroll-behavior:
+        smooth;
+
+}
+
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+.table-container::-webkit-scrollbar {
+
+    height:
+        8px;
+
+}
+
+
+.table-container::-webkit-scrollbar-track {
+
+    background:
+        #f1f5f9;
+
+}
+
+
+.table-container::-webkit-scrollbar-thumb {
+
+    background:
+        #cbd5e1;
+
+    border-radius:
+        10px;
+
+}
+
+
+.table-container::-webkit-scrollbar-thumb:hover {
+
+    background:
+        #94a3b8;
 
 }
