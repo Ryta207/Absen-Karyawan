@@ -711,6 +711,7 @@ function resetMinggu() {
         0,
         0
     ];
+        karyawan[i].potonganKasbon = 0;
 
     // Kasbon tidak direset
 }
