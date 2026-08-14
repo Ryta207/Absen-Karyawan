@@ -412,6 +412,55 @@ function ubahKasbon(
     tampilkanData();
 
 }
+/* =========================
+   POTONG KASBON
+========================= */
+
+function potongKasbon(index){
+
+    if(!karyawan[index]) return;
+
+    if(karyawan[index].kasbon<=0){
+
+        alert("Kasbon sudah habis.");
+
+        return;
+
+    }
+
+    let nominal = prompt(
+        "Masukkan nominal potongan kasbon:",
+        "0"
+    );
+
+    if(nominal===null) return;
+
+    nominal = Number(nominal);
+
+    if(isNaN(nominal) || nominal<=0){
+
+        alert("Nominal tidak valid.");
+
+        return;
+
+    }
+
+    if(nominal>karyawan[index].kasbon){
+
+        alert("Nominal melebihi sisa kasbon.");
+
+        return;
+
+    }
+
+    karyawan[index].kasbon -= nominal;
+
+    simpanData();
+
+    tampilkanData();
+
+    alert("Kasbon berhasil dipotong.");
+}
 
 
 /* =========================
