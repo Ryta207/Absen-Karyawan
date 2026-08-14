@@ -1,4 +1,4 @@
-* * {
+* {
     box-sizing: border-box;
 }
 
@@ -14,11 +14,6 @@ body {
     margin: auto;
     padding: 20px;
 }
-
-
-/* =========================
-   HEADER
-========================= */
 
 header {
     background: #2563eb;
@@ -36,11 +31,6 @@ header p {
     margin: 0;
 }
 
-
-/* =========================
-   CARD
-========================= */
-
 .card {
     background: white;
     padding: 20px;
@@ -48,11 +38,6 @@ header p {
     margin-bottom: 20px;
     box-shadow: 0 3px 12px rgba(0,0,0,0.08);
 }
-
-
-/* =========================
-   FORM
-========================= */
 
 .form {
     display: flex;
@@ -72,11 +57,6 @@ input {
     min-width: 180px;
 }
 
-
-/* =========================
-   BUTTON
-========================= */
-
 button {
     border: none;
     border-radius: 8px;
@@ -91,30 +71,9 @@ button:hover {
     opacity: 0.9;
 }
 
-
-/* =========================
-   WHATSAPP
-========================= */
-
 .laporan-card button {
-    background: #25D366;
+    background: #16a34a;
 }
-
-.whatsapp {
-    background: #25D366;
-    color: white;
-    margin-top: 5px;
-}
-
-.whatsapp:hover {
-    background: #1ebe5d;
-    opacity: 1;
-}
-
-
-/* =========================
-   TABLE
-========================= */
 
 .table-container {
     overflow-x: auto;
@@ -144,30 +103,15 @@ tr:hover {
     background: #f8fafc;
 }
 
-
-/* =========================
-   SELECT
-========================= */
-
 select {
     padding: 7px;
     border: 1px solid #cbd5e1;
     border-radius: 7px;
 }
 
-
-/* =========================
-   KASBON
-========================= */
-
 .kasbon {
     width: 100px;
 }
-
-
-/* =========================
-   TOMBOL AKSI
-========================= */
 
 .edit {
     background: #f59e0b;
@@ -175,6 +119,26 @@ select {
 
 .delete {
     background: #dc2626;
+}
+
+.print {
+    background: #0f766e;
+    margin-top: 5px;
+}
+
+/* =========================
+   WHATSAPP
+========================= */
+
+.whatsapp {
+    background: #25D366;
+    color: white;
+    margin-top: 5px;
+}
+
+.whatsapp:hover {
+    background: #1ebe5d;
+    opacity: 1;
 }
 
 .bersih {
@@ -188,7 +152,100 @@ select {
 
 
 /* =========================
-   MOBILE
+   LAPORAN CETAK
+========================= */
+
+#printArea {
+    display: none;
+}
+
+.laporan {
+    font-family: Arial, sans-serif;
+    color: #000;
+    padding: 20px;
+}
+
+.laporan h1 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.laporan h2 {
+    text-align: center;
+    margin-top: 0;
+}
+
+.laporan-info {
+    margin: 20px 0;
+}
+
+.laporan table {
+    width: 100%;
+    min-width: 0;
+    border-collapse: collapse;
+}
+
+.laporan th,
+.laporan td {
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: left;
+}
+
+.laporan th {
+    background: #eee;
+    color: #000;
+}
+
+.total-box {
+    margin-top: 20px;
+    border: 1px solid #000;
+    padding: 15px;
+}
+
+.total-box p {
+    margin: 7px 0;
+}
+
+.signature {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.signature div {
+    width: 200px;
+}
+
+
+/* =========================
+   MODE PRINT
+========================= */
+
+@media print {
+
+    body {
+        background: white;
+    }
+
+    .container {
+        display: none !important;
+    }
+
+    #printArea {
+        display: block !important;
+    }
+
+    @page {
+        size: A4;
+        margin: 15mm;
+    }
+}
+
+
+/* =========================
+   RESPONSIVE HP
 ========================= */
 
 @media (max-width: 600px) {
