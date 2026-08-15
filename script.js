@@ -55,7 +55,8 @@ function tambahKaryawan() {
             0
         ],
 
-        kasbon: 0
+        kasbon: 0,
+
         potonganKasbon: 0
 
     });
@@ -125,6 +126,13 @@ function tampilkanData() {
         }
 
 
+        if (item.potonganKasbon === undefined) {
+
+            item.potonganKasbon = 0;
+
+        }
+
+
         let totalHari = 0;
 
 
@@ -136,16 +144,18 @@ function tampilkanData() {
 
 
         const gajiKotor =
-    totalHari *
-    Number(item.gaji);
+            totalHari *
+            Number(item.gaji);
 
-if(item.potonganKasbon === undefined){
-    item.potonganKasbon = 0;
-}
 
-const gajiBersih =
-    gajiKotor -
-    Number(item.potonganKasbon);
+        const potonganKasbon =
+            Number(item.potonganKasbon) || 0;
+
+
+        const gajiBersih =
+            gajiKotor -
+            potonganKasbon;
+
 
         let hariHTML = "";
 
@@ -222,8 +232,7 @@ const gajiBersih =
 
                 <td>
 
-                    Rp ${Number(item.gaji)
-                        .toLocaleString("id-ID")}
+                    Rp ${rupiah(item.gaji)}
 
                 </td>
 
@@ -242,50 +251,61 @@ const gajiBersih =
 
                 <td class="kotor">
 
-                    Rp ${gajiKotor
-                        .toLocaleString("id-ID")}
+                    Rp ${rupiah(gajiKotor)}
 
                 </td>
 
 
-             <td>
+                <td>
 
-    <input
+                    <input
 
-        class="kasbon"
+                        class="kasbon"
 
-        type="number"
+                        type="number"
 
-        min="0"
+                        min="0"
 
-        value="${item.kasbon}"
+                        value="${item.kasbon}"
 
-        onchange="
-            ubahKasbon(
-                ${index},
-                this.value
-            )
-        "
+                        onchange="
+                            ubahKasbon(
+                                ${index},
+                                this.value
+                            )
+                        "
 
-    >
+                    >
 
-    <br>
+                    <br>
 
-    <button
-        type="button"
-        onclick="potongKasbon(${index})"
-        style="margin-top:5px;font-size:12px;width:100%;"
-    >
-        ➖ Potong
-    </button>
 
-</td>
+                    <button
+
+                        type="button"
+
+                        onclick="
+                            potongKasbon(${index})
+                        "
+
+                        style="
+                            margin-top:5px;
+                            font-size:12px;
+                            width:100%;
+                        "
+
+                    >
+
+                        ➖ Potong
+
+                    </button>
+
+                </td>
 
 
                 <td class="bersih">
 
-                    Rp ${gajiBersih
-                        .toLocaleString("id-ID")}
+                    Rp ${rupiah(gajiBersih)}
 
                 </td>
 
@@ -414,47 +434,13 @@ function ubahKasbon(
     if (!karyawan[index]) {
         return;
     }
-/* =========================
-   POTONG KASBON
-========================= */
 
-function potongKasbon(index){
-
-    if(!karyawan[index]) return;
-
-    if(karyawan[index].kasbon <= 0){
-        alert("Kasbon sudah habis.");
-        return;
-    }
-
-    let nominal = prompt(
-        "Masukkan nominal potongan kasbon:"
-    );
-
-    if(nominal === null) return;
-
-    nominal = Number(nominal);
-
-    if(isNaN(nominal) || nominal <= 0){
-        alert("Nominal tidak valid.");
-        return;
-    }
-
-    if(nominal > karyawan[index].kasbon){
-        alert("Nominal melebihi sisa kasbon.");
-        return;
-    }
-
-    karyawan[index].kasbon -= nominal;
-
-    simpanData();
-    tampilkanData();
-
-    alert("Kasbon berhasil dipotong.");
-}
 
     karyawan[index].kasbon =
-        Number(nilai) || 0;
+        Math.max(
+            0,
+            Number(nilai) || 0
+        );
 
 
     simpanData();
@@ -462,50 +448,114 @@ function potongKasbon(index){
     tampilkanData();
 
 }
+
+
 /* =========================
-   POTONG KASBON
+   POTONG KASBON DARI GAJI
 ========================= */
 
-function potongKasbon(index){
+function potongKasbon(index) {
 
-    if(!karyawan[index]) return;
-
-    if(karyawan[index].kasbon <= 0){
-        alert("Tidak ada kasbon.");
+    if (!karyawan[index]) {
         return;
     }
 
-    let nominal = prompt(
-        "Masukkan nominal potongan kasbon dari gaji:"
-    );
 
-    if(nominal === null) return;
+    const kasbon =
+        Number(karyawan[index].kasbon) || 0;
 
-    nominal = Number(nominal);
 
-    if(isNaN(nominal) || nominal <= 0){
-        alert("Nominal tidak valid.");
+    if (kasbon <= 0) {
+
+        alert(
+            "Tidak ada kasbon."
+        );
+
         return;
     }
 
-    if(nominal > karyawan[index].kasbon){
-        alert("Nominal melebihi sisa kasbon.");
+
+    let nominal =
+        prompt(
+            "Masukkan nominal potongan kasbon dari gaji:",
+            "0"
+        );
+
+
+    if (nominal === null) {
         return;
     }
 
-    karyawan[index].potonganKasbon = nominal;
-    karyawan[index].kasbon -= nominal;
+
+    nominal =
+        Number(nominal);
+
+
+    if (
+        isNaN(nominal) ||
+        nominal <= 0
+    ) {
+
+        alert(
+            "Nominal tidak valid."
+        );
+
+        return;
+    }
+
+
+    if (nominal > kasbon) {
+
+        alert(
+            "Nominal melebihi sisa kasbon."
+        );
+
+        return;
+    }
+
+
+    /*
+       SIMPAN NOMINAL YANG DIPOTONG
+       DARI GAJI
+    */
+
+    karyawan[index].potonganKasbon =
+        nominal;
+
+
+    /*
+       KURANGI SISA KASBON
+    */
+
+    karyawan[index].kasbon =
+        kasbon - nominal;
+
 
     simpanData();
+
     tampilkanData();
 
+
     alert(
-        "Potongan kasbon berhasil.\n" +
-        "Potongan: Rp " + rupiah(nominal) +
-        "\nSisa Kasbon: Rp " + rupiah(karyawan[index].kasbon)
+
+        "Potongan kasbon berhasil.\n\n" +
+
+        "Potongan: Rp " +
+        rupiah(nominal) +
+
+        "\nSisa Kasbon: Rp " +
+        rupiah(
+            karyawan[index].kasbon
+        ) +
+
+        "\n\nGaji akan dipotong Rp " +
+        rupiah(nominal)
+
     );
 
 }
+
+
 /* =========================
    EDIT KARYAWAN
 ========================= */
@@ -669,28 +719,43 @@ function statusHari(nilai) {
 
 /* =========================
    RESET MINGGU
+   ABSENSI RESET
+   KASBON TETAP
 ========================= */
 
 function resetMinggu() {
 
-    console.log("Tombol Reset Minggu ditekan");
+    console.log(
+        "Tombol Reset Minggu ditekan"
+    );
+
 
     if (karyawan.length === 0) {
 
-        alert("Belum ada data karyawan.");
+        alert(
+            "Belum ada data karyawan."
+        );
 
         return;
     }
 
 
-    const yakin = confirm(
-    "🔄 MULAI MINGGU BARU?\n\n" +
-    "Absensi semua karyawan akan direset.\n" +
-    "Kasbon akan tetap tersimpan.\n\n" +
-    "Nama dan gaji TETAP disimpan.\n\n" +
-    "Apakah kamu yakin?"
-);
-    );
+    const yakin =
+        confirm(
+
+            "🔄 MULAI MINGGU BARU?\n\n" +
+
+            "Absensi semua karyawan akan direset.\n" +
+
+            "Kasbon akan TETAP tersimpan.\n" +
+
+            "Potongan kasbon minggu ini akan direset.\n\n" +
+
+            "Nama dan gaji TETAP disimpan.\n\n" +
+
+            "Apakah kamu yakin?"
+
+        );
 
 
     if (!yakin) {
@@ -698,80 +763,58 @@ function resetMinggu() {
     }
 
 
-    /* Reset semua karyawan */
+    for (
+        let i = 0;
+        i < karyawan.length;
+        i++
+    ) {
 
-    for (let i = 0; i < karyawan.length; i++) {
+        karyawan[i].hari = [
 
-    karyawan[i].hari = [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-    ];
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+
+        ];
+
+
+        /*
+           POTONGAN MINGGU LALU
+           DIHAPUS
+        */
+
         karyawan[i].potonganKasbon = 0;
 
-    // Kasbon tidak direset
-}
+
+        /*
+           KASBON TIDAK DIRESET
+        */
+
+    }
 
 
-    /* Simpan */
-
-    localStorage.setItem(
-        "karyawan",
-        JSON.stringify(karyawan)
-    );
-
-
-    /* Tampilkan ulang */
+    simpanData();
 
     tampilkanData();
 
 
     alert(
+
         "✅ Minggu baru berhasil dimulai!\n\n" +
-     "Kasbon akan tetap tersimpan.\n\n"
+
+        "Absensi sudah direset.\n" +
+
+        "Kasbon tetap tersimpan."
+
     );
 
 }
 
 
-/* =========================
-   JALANKAN
-========================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        tampilkanData();
-
-
-        const tombolReset =
-            document.getElementById(
-                "resetMingguBtn"
-            );
-
-
-        if (tombolReset) {
-
-            tombolReset.addEventListener(
-                "click",
-                resetMinggu
-            );
-
-        } else {
-
-            console.error(
-                "Tombol resetMingguBtn tidak ditemukan."
-            );
-
-        }
-
-    }
-);
 /* =========================
    BUAT LAPORAN
 ========================= */
@@ -798,9 +841,13 @@ function buatLaporan(item) {
         Number(item.kasbon) || 0;
 
 
+    const potonganKasbon =
+        Number(item.potonganKasbon) || 0;
+
+
     const gajiBersih =
         gajiKotor -
-        kasbon;
+        potonganKasbon;
 
 
     let absensiHTML = "";
@@ -1177,7 +1224,20 @@ Rp ${rupiah(gajiKotor)}
 
 <p>
 
-Kasbon:
+Potongan Kasbon:
+
+<strong>
+
+Rp ${rupiah(potonganKasbon)}
+
+</strong>
+
+</p>
+
+
+<p>
+
+Sisa Kasbon:
 
 <strong>
 
@@ -1424,9 +1484,13 @@ function kirimWhatsApp(index) {
         Number(item.kasbon) || 0;
 
 
+    const potonganKasbon =
+        Number(item.potonganKasbon) || 0;
+
+
     const gajiBersih =
         gajiKotor -
-        kasbon;
+        potonganKasbon;
 
 
     let absensi = "";
@@ -1472,7 +1536,8 @@ ${absensi}
 
 Total Hari : ${totalHari} Hari
 Gaji Kotor : Rp ${rupiah(gajiKotor)}
-Kasbon : Rp ${rupiah(kasbon)}
+Potongan Kasbon : Rp ${rupiah(potonganKasbon)}
+Sisa Kasbon : Rp ${rupiah(kasbon)}
 
 💵 *GAJI BERSIH*
 
@@ -1496,4 +1561,33 @@ Rp ${rupiah(gajiBersih)}
    JALANKAN
 ========================= */
 
-tampilkanData();
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        tampilkanData();
+
+
+        const tombolReset =
+            document.getElementById(
+                "resetMingguBtn"
+            );
+
+
+        if (tombolReset) {
+
+            tombolReset.addEventListener(
+                "click",
+                resetMinggu
+            );
+
+        } else {
+
+            console.error(
+                "Tombol resetMingguBtn tidak ditemukan."
+            );
+
+        }
+
+    }
+);
